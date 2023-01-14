@@ -1,3 +1,5 @@
+import axios from "axios"
+import { response } from "express"
 import { container } from "webpack"
 
 const Card = (article) => {
@@ -48,7 +50,7 @@ const Card = (article) => {
   return card
 }
 
-const cardAppender = (selector) => {
+const cardAppender = async (selector) => {
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -57,8 +59,12 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
-console.log('http://localhost:5001/api/articles')
-
+  const URL = (`http://localhost:5001/api/articles`)
+  const hold = await axios.get(URL)
+  const articles = Object.values(hold.data.articles).flat()
+  articles.forEach(article => {
+    document.querySelector(selector).appendChild(Card(article))
+  })
 }
 
 export { Card, cardAppender }
