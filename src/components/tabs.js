@@ -38,16 +38,26 @@ const tabsAppender = (selector) => {
   // Find the array of topics inside the response, and create the tabs using the Tabs component.
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
-const URL = `http://localhost:5001/api/topics`
-  axios.get(URL)
+
+axios.get("http://localhost:5001/api/topics")
   .then(res => {
-      res.data.forEach(topics => {
-      const newTabs = Tabs(topics)
-      document.querySelector(selector).appendChild(newTabs)
-      })
-  })
+       for(let i = 0; i < topics.topics.length; i++){
+        
+        res.data.topics[x].forEach(topics => {
+        document.querySelector(selector).appendChild(Tabs(topics))})
+        
+        
+        // var newTopics = document.querySelector(topics.topics[i])
+        // newTopics.appendChild(Tabs(res.data))
+      // }for(let x in res.data.topics){
+    //     res.data.topics[x].forEach(topics => {
+    //   document.querySelector(selector).appendChild(Tabs(topics))})
+    }//for loop
+    })//then
   .catch(err => {
     debugger  
-  })
-}
+  })//.catch
+}//tabsApprender
 export { Tabs, tabsAppender }
+
+
