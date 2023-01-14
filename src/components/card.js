@@ -30,10 +30,11 @@ const Card = (article) => {
   headline.classList.add('headline')
   author.classList.add('author')
   imgCont.classList.add('img-container')
-  authorImage.src = article.authorPhoto
+ 
   
   headline.textContent = article.headline
-  nameAuthor.textContent = article.authorName
+  authorImage.src = article.authorPhoto
+  nameAuthor.textContent = `By ${article.authorName}`
 
   card.appendChild(headline)
   card.appendChild(author)
@@ -42,9 +43,9 @@ const Card = (article) => {
   author.appendChild(nameAuthor)
 
   card.addEventListener('click', () => {
-    
+    console.log(headline.textContent)
   })
-
+  return card
 }
 
 const cardAppender = (selector) => {
@@ -56,6 +57,8 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+console.log('http://localhost:5001/api/articles')
+
 }
 
 export { Card, cardAppender }
