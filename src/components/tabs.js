@@ -30,7 +30,7 @@ const Tabs = (topics) => {
   return topicsClass
 }
 
-const tabsAppender = (selector) => {
+const tabsAppender = async (selector) => {
   // TASK 4
   // ---------------------
   // Implement this function which takes a css selector as its only argument.
@@ -39,10 +39,11 @@ const tabsAppender = (selector) => {
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
 const URL = `http://localhost:5001/api/topics`
-  axios.get(URL)
-    resp.data.forEach(item => {
+  const hold = await axios.get(URL)
+  const topics = Objects.values(hold.data.topics).flat()
+    topics.forEach(item => {
      const newTabs = Tabs(item)
-     document.querySelector(selector).appendChild(newTabs)
+     document.querySelector(selector).appendChild(item)
   })
 }
 
